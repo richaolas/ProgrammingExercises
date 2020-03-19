@@ -1,2 +1,2 @@
-# ProgrammingExercises
-some programming exercises
+# Programming Exercises
+Some programming exercises.
