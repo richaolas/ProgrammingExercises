@@ -4,7 +4,7 @@
 下图是火车车厢内座位的布局，座位号从1到80；
 其中1、2、 5、6位于一个间隔内，3、4、7、8也是一个间隔内的座位…
 
-![图片](./p1.png)
+![图片](https://github.com/richaolas/ProgrammingExercises/blob/master/e2.sale_ticket/p1.png?raw=true)
 
 ### 售票规则总则：
 1.	假设每次最多售4张；
@@ -18,4 +18,4 @@
 2. 编写程序模拟售票过程，售票张数n由用户输入。(n = 1,2,3,4)
 3. 程序输出如下所示：
 
-![图片](./p2.png)
+![图片](https://github.com/richaolas/ProgrammingExercises/blob/master/e2.sale_ticket/p2.png?raw=true)
