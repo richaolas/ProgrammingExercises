@@ -9,17 +9,17 @@
 #include <stdlib.h>
 #include <memory.h>
 
-#define MC_UINT16(__data__) ( ((__data__>>8)&0x00FF) | ((__data__<<8)&0xFF00) )
-#define MC_UINT32(__data__) ( ((__data__>>24)&0x000000FF) | ((__data__>> 8)&0x0000FF00) | \
-                              ((__data__<< 8)&0x00FF0000) | ((__data__<<24)&0xFF000000) )
+#define MC_UINT16(__data__) ( (__data__)>>8 | (__data__)<<8 )
+#define MC_UINT32(__data__) ( (__data__)>>24 | (((__data__)>> 8)&0xFF00) | \
+                              (((__data__)<< 8)&0x00FF0000) | (((__data__)<<24)&0xFF000000) )
 /*
 31-8	Reserved
 7	路线名称有无Flag
 6-4	岔路数
 3-0	交叉Link列表示Class番号
 */
-#define ROAD_NAME_FLAG(__data__) ((((__data__) & 0x80) >> 7) & 0x0001)
-#define BRUCH(__data__)          ((((__data__) & 0x70) >> 4) & 0x0007)
+#define ROAD_NAME_FLAG(__data__) ((((__data__) & 0x80) >> 7) & 0x01)
+#define BRUCH(__data__)          ((((__data__) & 0x70) >> 4) & 0x07)
 #define DISPCLASS(__data__)      ((__data__) & 0x07)
 
 typedef struct Link
