@@ -3,11 +3,11 @@
 在一个应用程序中, 需要通过一个二维表查找对应的内容. 见下表: 
 ```  
             AA(COLUMN 0)    BB(COLUMN 1)    CC(COLUMN 2)    DD(COLUMN 3)	…   
-AA(ROW 0)	A0	            A1	            A1	            A4	            …   
-BB(ROW 1)	A2	            A2	            A5	            A3	            …   
-CC(ROW 2)	A8	            A7	            A6	            A6	            …   
-DD(ROW 3)	A9	            A9	            A9	            A9	            …   
-…	        …	            …	            …	            …	            …
+AA(ROW 0)	A0	            A1	            A1	            A4              …   
+BB(ROW 1)	A2	            A2	            A5	            A3              …   
+CC(ROW 2)	A8	            A7	            A6	            A6              …   
+DD(ROW 3)	A9	            A9	            A9	            A9              …   
+…	        …	            …	            …	            …               …
 ```
 当指定ROW值和COLUMN值时, 就能查找到对应的内容(A值),  这些表格有***多个***, 将作为程序的数据部分.
 
@@ -29,11 +29,11 @@ DD(ROW 3)	A9	            A9	            A9	            A9	            …
 
 下面是原始数据:    
 ```
-				AA	    BB	    CC      DD    
-		AA		0		1		1		4    
-		BB		2		2		5		3    
-		CC		8		7		6		6    
-		DD		9		9		9		9    
+    AA  BB  CC  DD    
+AA	0   1   1   4    
+BB	2   2   5   3    
+CC	8   7   6   6    
+DD	9   9   9	9    
 ```
 
 4.	输出格式要求:
@@ -41,25 +41,25 @@ DD(ROW 3)	A9	            A9	            A9	            A9	            …
 下面是输出的例子
 
 ```
-#define ROW_AA		0
-#define ROW_BB		1
-#define ROW_CC		2
-#define ROW_DD		3
+#define ROW_AA		    0
+#define ROW_BB		    1
+#define ROW_CC		    2
+#define ROW_DD		    3
 ...
-#define ROW_COUNT	 4
+#define ROW_COUNT       4
 
-#define COLUMN_AA		0
-#define COLUMN_BB		1
-#define COLUMN_CC		2
-#define COLUMN_DD		3
+#define COLUMN_AA       0
+#define COLUMN_BB       1
+#define COLUMN_CC       2
+#define COLUMN_DD       3
 ...
-#define COLUMN_COUNT	4
+#define COLUMN_COUNT    4
 
 static <type> nuiTableData_a[][COLUMN_COUNT] = {
-		0, 1, 1, 4,
-		2, 2, 5, 3,
-		8, 7, 6, 6,
-		9, 9, 9, 9
+    0, 1, 1, 4,
+    2, 2, 5, 3,
+    8, 7, 6, 6,
+    9, 9, 9, 9
 };
 
 STableContext nstTestTable_a =
@@ -75,38 +75,39 @@ STableContext nstTestTable_a =
 8.	ROW VALUE 的定义和 COLUMN VALUE 定义类似, 但需要进行压缩判断.如果两行内容相同, ROW VALUE值也应该一样.
 例如原始数据:
 ```
-            C1  C2  C3  C4  C5
-	PP		0	0	1	1	2
-	RR		1	2	2	1	5
-	QQ		0	1	2	3	4
-	SS		1	2	2	1	5
-	TT		9	9	8	8	7
-	...
+    C1  C2  C3  C4  C5
+PP	0	0	1	1	2
+RR	1	2	2	1	5
+QQ	0	1	2	3	4
+SS	1	2	2	1	5
+TT	9	9	8	8	7
+
+...
 ```
 那么输出的结果应是:
 ```
-    #define COLUMN_C1 0
-    #define COLUMN_C2 1
-    #define COLUMN_C3 2
-    #define COLUMN_C4 3
-    #define COLUMN_C5 4
-    #define COLUMN_COUNT 5
+#define COLUMN_C1 0
+#define COLUMN_C2 1
+#define COLUMN_C3 2
+#define COLUMN_C4 3
+#define COLUMN_C5 4
+#define COLUMN_COUNT 5
 
-	#define	ROW_PP	0
-	#define	ROW_RR	1
-	#define ROW_QQ	2
-	#define	ROW_SS	ROW_RR
-	#define	ROW_TT	3
-    ...
-    static <type> nuiTableData_a[][COLUMN_COUNT] = {
-        0, 0, 1, 1, 2,
-        1, 2, 2, 1, 5,
-        0, 1, 2, 3, 4,
-        9, 9, 8, 8, 7
-    };
+#define	ROW_PP	0
+#define	ROW_RR	1
+#define ROW_QQ	2
+#define	ROW_SS	ROW_RR
+#define	ROW_TT	3
+...
+static <type> nuiTableData_a[][COLUMN_COUNT] = {
+    0, 0, 1, 1, 2,
+    1, 2, 2, 1, 5,
+    0, 1, 2, 3, 4,
+    9, 9, 8, 8, 7
+};
 
-    STableContext nstTestTable_a =
-    { ROW_COUNT, COLUMN_COUNT, nuiTableData_a };
+STableContext nstTestTable_a =
+{ ROW_COUNT, COLUMN_COUNT, nuiTableData_a };
 
 ```
 
