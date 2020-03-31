@@ -21,7 +21,7 @@ string trim(const string& s) {
 void split(const string& s, const string& delim, vector<string>& ret) {
     size_t last = 0;
     size_t index = s.find_first_of(delim, last);
-    while (index != string::npos) {//���ҵ�ƥ��
+    while (index != string::npos) {
         string elem = s.substr(last, index - last);
         if (delim.find(elem)== string::npos)
             ret.push_back(elem);
@@ -146,7 +146,6 @@ private:
 class TableParser
 {
 public:
-
     TableParser(string path)
     {
         file.open(path);
@@ -160,31 +159,33 @@ public:
     bool nextTable(Table & table)
     {
         table.clear();
+        string line;
+        std::vector<std::string> raw;
+
         while (!file.eof())
         {
-            string line;
             getline(file, line);
-            string trimline = trim(line);
+            line = trim(line);
 
-            if (trimline.empty())
+            if (line.empty())
             {
                 if (table.hasHeader())
                     break;
                 continue;
             }
 
-            std::vector<std::string> raw;
-            split(trimline, " \t", raw);
+            raw.clear();
+            split(line, " \t", raw);
 
             if (!table.hasHeader())
             {
-                table._header.insert(table._header.end(), raw.begin(), raw.end());
+                swap(table._header, raw); // or table._header = move(raw);
             }
             else {                
                 table._rowName.push_back(raw[0]);
                 table._rows.push_back(vector<int>());
                 transform(next(raw.begin()), raw.end(), 
-                    back_inserter(table._rows[table._rows.size() - 1]),
+                    back_inserter(*prev(table._rows.end())),
                     [](const string& s)->int {return stol(s, 0, 10);});
             }
         }
@@ -200,7 +201,7 @@ int main()
 {
     TableParser parser("sample.txt");
     string tag = "a";
-    while (1)
+    while (true)
     {
         Table table;
         if (parser.nextTable(table))
