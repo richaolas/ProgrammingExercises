@@ -11,12 +11,6 @@ DD(ROW 3)	A9	            A9	            A9	            A9              …
 ```
 当指定ROW值和COLUMN值时, 就能查找到对应的内容(A值),  这些表格有***多个***, 将作为程序的数据部分.
 
-编制一个函数实现这个功能。    
-```
-	struct STableContext;
-	unsigned int wuiGetTableItem(STableContext* pstTable, unsigned int uiRow, unsigned int uiColumn);
-```
-
 已知前提条件如下：
 1.	表的数据内容是一个0到65535的数值.
 2.	对应的二维表有多个, 而且每个表的 ROW_COUNT 和 COLUMN_COUNT 都不相同.
@@ -71,8 +65,8 @@ STableContext nstTestTable_a =
 ```
 5.	原始表格数据是正确的, 不必考虑对原始数据的严格分析判断
 6.	根据原始数据计算出 ROW_COUNT 和 COLUMN_COUNT 的值
-7.	COLUMN VALUE 从0开始, 依次递增.
-8.	ROW VALUE 的定义和 COLUMN VALUE 定义类似, 但需要进行压缩判断.如果两行内容相同, ROW VALUE值也应该一样.
+7.	COLUMN_VALUE 从0开始, 依次递增.
+8.	ROW_VALUE 的定义和 COLUMN_VALUE 定义类似, 但需要进行压缩判断.如果两行内容相同, ROW_VALUE值也应该一样.
 例如原始数据:
 ```
     C1  C2  C3  C4  C5
@@ -98,6 +92,7 @@ TT	9	9	8	8	7
 #define ROW_QQ	2
 #define	ROW_SS	ROW_RR
 #define	ROW_TT	3
+#define ROW_COUNT 4
 ...
 static <type> nuiTableData_a[][COLUMN_COUNT] = {
     0, 0, 1, 1, 2,
@@ -111,7 +106,5 @@ STableContext nstTestTable_a =
 
 ```
 
-题目:
-1.	定义STableContext
-2.	编写wuiGetTableItem
-3.	编写一个程序。 读取一个文本表格文件, 并生成另一种格式的文件(C++语言头文件格式), 同时将表格的行列索引(AAA, BBB, CCC…,即ROW VALUE, COLUMN VALUE)以C++语言的格式进行定义.
+### 要求:
+编写一个程序。 读取一个文本表格文件, 并生成另一种格式的文件(C++语言头文件格式data.h), 格式描述如上所述.

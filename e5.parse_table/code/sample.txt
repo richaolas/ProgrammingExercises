@@ -1,0 +1,29 @@
+
+
+     coloum1  coloum2 coloum3								
+row1 1			2		3  
+row2 4 5 6 
+row3 7 8 9
+row4 4 5 6
+
+
+
+    coloum1  coloum2 coloum3   
+row1 1			2		3  
+row2 4 5 6 
+row3 7 8 9
+
+
+    coloum1  coloum2		coloum3    colum4
+		row1 1			2		3   7
+		row2 4 5 6 90
+	row3 7						8 9 78
+	row4 7						8 9 78
+	row5 7						8 9 78
+	row6 7						8 9 78
+	row7 1						2 3 7
+	row8 7						8 9 78
+	row9 7						8 9 78
+	row10 7						8 9 78
+	row11 7						8 9 78
+	row12 7						8 9 78
